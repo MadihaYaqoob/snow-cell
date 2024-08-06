@@ -1,26 +1,16 @@
-/**
-=========================================================
-* Material Dashboard 2 PRO React - v2.2.0
-=========================================================
+// src/pages/Overview.js
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-pro-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
+import React from 'react';
 import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
 import Tooltip from "@mui/material/Tooltip";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
+import MDBadgeDot from "components/MDBadgeDot";
 import MDTypography from "components/MDTypography";
+import MDButton from "components/MDButton";
 
 // Material Dashboard 2 PRO React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -28,88 +18,41 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
 import ReportsLineChart from "examples/Charts/LineCharts/ReportsLineChart";
-import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
-import BookingCard from "examples/Cards/BookingCard";
-
-// Anaytics dashboard components
-import SalesByCountry from "layouts/dashboards/analytics/components/SalesByCountry";
+import PieChart from "examples/Charts/PieChart";
 
 // Data
-import reportsBarChartData from "layouts/dashboards/analytics/data/reportsBarChartData";
-import reportsLineChartData from "layouts/dashboards/analytics/data/reportsLineChartData";
+import gpuUsageData from "layouts/dashboards/analytics/data/gpuUsageData";
+import activeInstancesData from "layouts/dashboards/analytics/data/activeInstancesData";
+import resourceAllocationData from "layouts/dashboards/analytics/data/resourceAllocationData";
+import systemPerformanceData from "layouts/dashboards/analytics/data/systemPerformanceData";
+import costBreakdownData from "layouts/dashboards/analytics/data/costBreakdownData";
 
-// Images
-import booking1 from "assets/images/products/product-1-min.jpg";
-import booking2 from "assets/images/products/product-2-min.jpg";
-import booking3 from "assets/images/products/product-3-min.jpg";
-
-function Analytics() {
-  const { sales, tasks } = reportsLineChartData;
-
-  // Action buttons for the BookingCard
-  const actionButtons = (
-    <>
-      <Tooltip title="Refresh" placement="bottom">
-        <MDTypography
-          variant="body1"
-          color="primary"
-          lineHeight={1}
-          sx={{ cursor: "pointer", mx: 3 }}
-        >
-          <Icon color="inherit">refresh</Icon>
-        </MDTypography>
-      </Tooltip>
-      <Tooltip title="Edit" placement="bottom">
-        <MDTypography variant="body1" color="info" lineHeight={1} sx={{ cursor: "pointer", mx: 3 }}>
-          <Icon color="inherit">edit</Icon>
-        </MDTypography>
-      </Tooltip>
-    </>
-  );
-
+function Analytic() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox py={3}>
-        <Grid container>
-          <SalesByCountry />
-        </Grid>
         <MDBox mt={6}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid item xs={12} md={6} lg={6}>
               <MDBox mb={3}>
                 <ReportsBarChart
                   color="info"
-                  title="website views"
-                  description="Last Campaign Performance"
-                  date="campaign sent 2 days ago"
-                  chart={reportsBarChartData}
+                  title="Total GPU Usage"
+                  description="Current GPU usage across all instances"
+                  date="updated 2 min ago"
+                  chart={gpuUsageData.usage}
                 />
               </MDBox>
             </Grid>
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid item xs={12} md={6} lg={6}>
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="success"
-                  title="daily sales"
-                  description={
-                    <>
-                      (<strong>+15%</strong>) increase in today sales.
-                    </>
-                  }
+                  title="Current Active Instances"
+                  description="Number of active instances running"
                   date="updated 4 min ago"
-                  chart={sales}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="dark"
-                  title="completed tasks"
-                  description="Last Campaign Performance"
-                  date="just updated"
-                  chart={tasks}
+                  chart={activeInstancesData.instances}
                 />
               </MDBox>
             </Grid>
@@ -117,102 +60,62 @@ function Analytics() {
         </MDBox>
         <MDBox mt={1.5}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={3}>
-              <MDBox mb={1.5}>
-                <ComplexStatisticsCard
-                  color="dark"
-                  icon="weekend"
-                  title="Bookings"
-                  count={281}
-                  percentage={{
-                    color: "success",
-                    amount: "+55%",
-                    label: "than lask week",
-                  }}
-                />
-              </MDBox>
+            <Grid item xs={12} md={6} lg={4}>
+              <Card sx={{ height: "93%", display: "flex", flexDirection: "column" }}>
+                <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={2} px={2}>
+                  <MDTypography variant="h6">Resource Allocation</MDTypography>
+                  <Tooltip title="See resource allocation" placement="bottom" arrow>
+                    <MDButton variant="outlined" color="secondary" size="small" circular iconOnly>
+                      <Icon>info</Icon>
+                    </MDButton>
+                  </Tooltip>
+                </MDBox>
+                <MDBox mt={1} flex={1} display="flex" alignItems="center">
+                  <Grid container alignItems="center">
+                    <Grid item xs={8}>
+                      <MDBox p={2}>
+                        <PieChart 
+                          chart={resourceAllocationData.allocation}
+                          height="15rem" // Adjust height as needed
+                        />
+                      </MDBox>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <MDBox display="flex" flexDirection="column" alignItems="flex-start" p={2}>
+                        <MDBox mb={1}>
+                          <MDBadgeDot color="info" size="sm" badgeContent="CPU" />
+                        </MDBox>
+                        <MDBox mb={1}>
+                          <MDBadgeDot color="primary" size="sm" badgeContent="Memory" />
+                        </MDBox>
+                        <MDBox mb={1}>
+                          <MDBadgeDot color="dark" size="sm" badgeContent="Disk" />
+                        </MDBox>
+                      </MDBox>
+                    </Grid>
+                  </Grid>
+                </MDBox>
+              </Card>
             </Grid>
-            <Grid item xs={12} md={6} lg={3}>
-              <MDBox mb={1.5}>
-                <ComplexStatisticsCard
-                  icon="leaderboard"
-                  title="Today's Users"
-                  count="2,300"
-                  percentage={{
-                    color: "success",
-                    amount: "+3%",
-                    label: "than last month",
-                  }}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={3}>
-              <MDBox mb={1.5}>
-                <ComplexStatisticsCard
-                  color="success"
-                  icon="store"
-                  title="Revenue"
-                  count="34k"
-                  percentage={{
-                    color: "success",
-                    amount: "+1%",
-                    label: "than yesterday",
-                  }}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={3}>
-              <MDBox mb={1.5}>
-                <ComplexStatisticsCard
+            <Grid item xs={12} md={6} lg={4}>
+              <MDBox mb={3}>
+                <ReportsBarChart
                   color="primary"
-                  icon="person_add"
-                  title="Followers"
-                  count="+91"
-                  percentage={{
-                    color: "success",
-                    amount: "",
-                    label: "Just updated",
-                  }}
-                />
-              </MDBox>
-            </Grid>
-          </Grid>
-        </MDBox>
-        <MDBox mt={2}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mt={3}>
-                <BookingCard
-                  image={booking1}
-                  title="Cozy 5 Stars Apartment"
-                  description='The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona.'
-                  price="$899/night"
-                  location="Barcelona, Spain"
-                  action={actionButtons}
+                  title="Overall System Performance"
+                  description="System uptime and latency"
+                  date="updated 10 min ago"
+                  chart={systemPerformanceData.performance}
                 />
               </MDBox>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <MDBox mt={3}>
-                <BookingCard
-                  image={booking2}
-                  title="Office Studio"
-                  description='The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the night life in London, UK.'
-                  price="$1.119/night"
-                  location="London, UK"
-                  action={actionButtons}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mt={3}>
-                <BookingCard
-                  image={booking3}
-                  title="Beautiful Castle"
-                  description='The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.'
-                  price="$459/night"
-                  location="Milan, Italy"
-                  action={actionButtons}
+              <MDBox mb={3}>
+                <ReportsBarChart
+                  color="warning"
+                  title="Cost Breakdown"
+                  description="Cost per instance or user"
+                  date="updated 10 min ago"
+                  chart={costBreakdownData.cost}
                 />
               </MDBox>
             </Grid>
@@ -224,4 +127,4 @@ function Analytics() {
   );
 }
 
-export default Analytics;
+export default Analytic;

@@ -1,28 +1,17 @@
 import { useState, useEffect } from "react";
-
-// react-router components
 import { useLocation, Link } from "react-router-dom";
-
-// prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
-
-// @material-ui core components
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import Icon from "@mui/material/Icon";
-
-// Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
 import MDInput from "components/MDInput";
 import MDBadge from "components/MDBadge";
-
-// Material Dashboard 2 PRO React examples
 import Breadcrumbs from "examples/Breadcrumbs";
 import NotificationItem from "examples/Items/NotificationItem";
-
-// Custom styles for DashboardNavbar
 import {
   navbar,
   navbarContainer,
@@ -31,54 +20,82 @@ import {
   navbarDesktopMenu,
   navbarMobileMenu,
 } from "examples/Navbars/DashboardNavbar/styles";
-
-// Material Dashboard 2 PRO React context
 import {
   useMaterialUIController,
   setTransparentNavbar,
   setMiniSidenav,
-  setOpenConfigurator,
+  setDarkMode,
 } from "context";
+
+// Function to get relative time
+const getRelativeTime = (timestamp) => {
+  const now = new Date();
+  const seconds = Math.floor((now - timestamp) / 1000);
+  if (seconds < 60) return `${seconds}s ago`;
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  return `${days}d ago`;
+};
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useMaterialUIController();
-  const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode } = controller;
+  const { miniSidenav, transparentNavbar, fixedNavbar, darkMode } = controller;
   const [openMenu, setOpenMenu] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [notificationCount, setNotificationCount] = useState(0);
   const route = useLocation().pathname.split("/").slice(1);
 
   useEffect(() => {
-    // Setting the navbar type
     if (fixedNavbar) {
       setNavbarType("sticky");
     } else {
       setNavbarType("static");
     }
 
-    // A function that sets the transparent state of the navbar.
     function handleTransparentNavbar() {
       setTransparentNavbar(dispatch, (fixedNavbar && window.scrollY === 0) || !fixedNavbar);
     }
 
-    /** 
-     The event listener that's calling the handleTransparentNavbar function when 
-     scrolling the window.
-    */
     window.addEventListener("scroll", handleTransparentNavbar);
-
-    // Call the handleTransparentNavbar function to set the state with the initial value.
     handleTransparentNavbar();
 
-    // Remove event listener on cleanup
     return () => window.removeEventListener("scroll", handleTransparentNavbar);
   }, [dispatch, fixedNavbar]);
 
   const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
-  const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
   const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
   const handleCloseMenu = () => setOpenMenu(false);
+  const handleDarkModeToggle = () => setDarkMode(dispatch, !darkMode);
 
-  // Render the notifications menu
+  useEffect(() => {
+    // Dummy data for notifications with timestamps
+    const dummyNotifications = [
+      { id: 1, message: "New VM created successfully.", timestamp: new Date() - 5000 }, // 5 seconds ago
+      { id: 2, message: "Resource usage exceeded threshold.", timestamp: new Date() - 60000 }, // 1 minute ago
+      { id: 3, message: "System update completed.", timestamp: new Date() - 7200000 }, // 2 hours ago
+    ];
+
+    setNotifications(dummyNotifications);
+    setNotificationCount(dummyNotifications.length);
+
+    // Optionally, set up an interval for dummy updates
+    const interval = setInterval(() => {
+      const newNotification = {
+        id: Math.random(), // Unique id
+        message: "New dummy notification.",
+        timestamp: new Date(), // Current time
+      };
+      setNotifications((prev) => [newNotification, ...prev]);
+      setNotificationCount((prev) => prev + 1);
+    }, 60000); // Add new dummy notification every 60 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   const renderMenu = () => (
     <Menu
       anchorEl={openMenu}
@@ -91,13 +108,21 @@ function DashboardNavbar({ absolute, light, isMini }) {
       onClose={handleCloseMenu}
       sx={{ mt: 2 }}
     >
-      <NotificationItem icon={<Icon>email</Icon>} title="Check new messages" />
-      <NotificationItem icon={<Icon>podcasts</Icon>} title="Manage Podcast sessions" />
-      <NotificationItem icon={<Icon>shopping_cart</Icon>} title="Payment successfully completed" />
+      {notifications.length > 0 ? (
+        notifications.map((notification) => (
+          <NotificationItem
+            key={notification.id}
+            icon={<Icon>notifications</Icon>} // Replace with the required icon
+            title={notification.message}
+            timestamp={getRelativeTime(notification.timestamp)} // Show relative time
+          />
+        ))
+      ) : (
+        <MenuItem>No new notifications</MenuItem>
+      )}
     </Menu>
   );
 
-  // Styles for the navbar icons
   const iconsStyle = ({ palette: { dark, white, text }, functions: { rgba } }) => ({
     color: () => {
       let colorValue = light || darkMode ? white.main : dark.main;
@@ -152,9 +177,9 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 disableRipple
                 color="inherit"
                 sx={navbarIconButton}
-                onClick={handleConfiguratorOpen}
+                onClick={handleDarkModeToggle}
               >
-                <Icon sx={iconsStyle}>settings</Icon>
+                <Icon sx={iconsStyle}>{darkMode ? "brightness_7" : "brightness_4"}</Icon>
               </IconButton>
               <IconButton
                 size="small"
@@ -166,8 +191,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 variant="contained"
                 onClick={handleOpenMenu}
               >
-                <MDBadge badgeContent={9} color="error" size="xs" circular>
-                  <Icon sx={iconsStyle}>notifications</Icon>
+                <MDBadge badgeContent={notificationCount} color="error" size="xs" circular>
+                  <Icon sx={iconsStyle}>notifications</Icon> {/* Replace with the required icon */}
                 </MDBadge>
               </IconButton>
               {renderMenu()}
@@ -179,14 +204,12 @@ function DashboardNavbar({ absolute, light, isMini }) {
   );
 }
 
-// Setting default values for the props of DashboardNavbar
 DashboardNavbar.defaultProps = {
   absolute: false,
   light: false,
   isMini: false,
 };
 
-// Typechecking props for the DashboardNavbar
 DashboardNavbar.propTypes = {
   absolute: PropTypes.bool,
   light: PropTypes.bool,
