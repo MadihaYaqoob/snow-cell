@@ -3,7 +3,7 @@ const resourceAllocationData = {
     labels: ["CPU", "Memory", "Disk"],
     datasets: {
       label: "Resource Allocation",
-      backgroundColor: ["#ff6384", "#36a2eb", "#ffce56"],
+      backgroundColors: ["info", "primary", "dark"],
       data: [30, 50, 20], // Sample data
     },
   },
