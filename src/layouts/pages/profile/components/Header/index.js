@@ -38,7 +38,7 @@ import breakpoints from "assets/theme/base/breakpoints";
 import burceMars from "assets/images/bruce-mars.jpg";
 import backgroundImage from "assets/images/bg-profile.jpeg";
 
-function Header({ children }) {
+function Header({ tabs, children }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
 
@@ -63,7 +63,7 @@ function Header({ children }) {
   }, [tabsOrientation]);
 
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
-
+  console.log(tabs);
   return (
     <MDBox position="relative" mb={5}>
       <MDBox
@@ -118,10 +118,10 @@ function Header({ children }) {
                   }
                 />
                 <Tab
-                  label="Message"
+                  label="Billing"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      email
+                      payment
                     </Icon>
                   }
                 />
@@ -137,7 +137,7 @@ function Header({ children }) {
             </AppBar>
           </Grid>
         </Grid>
-        {children}
+        {tabs ? tabs[tabValue] : children}
       </Card>
     </MDBox>
   );
@@ -150,6 +150,7 @@ Header.defaultProps = {
 
 // Typechecking props for the Header
 Header.propTypes = {
+  tabs: PropTypes.array,
   children: PropTypes.node,
 };
 

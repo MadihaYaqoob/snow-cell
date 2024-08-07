@@ -98,17 +98,12 @@ function ImagesPage() {
   const rowsContainerRegistry = containerRegistryData.map((item) => ({
     ...item,
     actions: (
-      <MDBox display="flex" alignItems="center">
-        <MDButton variant="text" color="error" sx={{ minWidth: "auto", px: 0 }}>
-          <Icon>delete</Icon>
-        </MDButton>
-        <MDButton
-          variant="text"
-          color={darkMode ? "#B0B0B0" : "dark"}
-          sx={{ minWidth: "auto", px: 0, ml: 1 }}
-        >
-          <Icon>edit</Icon>
-        </MDButton>
+      <MDBox display="flex" alignItems="center" justifyContent="space-between">
+        <MDBox display="flex" flexDirection={{ xs: "column", sm: "row" }}>
+          <MDButton variant="outlined" color="primary" sx={{ minWidth: "100px", px: 0 }}>
+            Delete
+          </MDButton>
+        </MDBox>
         <MDTypography
           color="secondary"
           onClick={(event) => openMenu(event, item.id)}
@@ -128,8 +123,7 @@ function ImagesPage() {
           onClose={closeMenu}
           keepMounted
         >
-          <MenuItem>Action 1</MenuItem>
-          <MenuItem>Action 2</MenuItem>
+          <MenuItem>Edit</MenuItem>
         </Menu>
       </MDBox>
     ),
@@ -138,17 +132,12 @@ function ImagesPage() {
   const rowsCurrentImages = currentImagesData.map((item) => ({
     ...item,
     actions: (
-      <MDBox display="flex" alignItems="center">
-        <MDButton variant="text" color="error" sx={{ minWidth: "auto", px: 0.5 }}>
-          <Icon>delete</Icon>
-        </MDButton>
-        <MDButton
-          variant="text"
-          color={darkMode ? "#B0B0B0" : "dark"}
-          sx={{ minWidth: "auto", px: 0.5, ml: 1 }}
-        >
-          <Icon>edit</Icon>
-        </MDButton>
+      <MDBox display="flex" alignItems="center" justifyContent="space-between">
+        <MDBox display="flex" flexDirection={{ xs: "column", sm: "row" }}>
+          <MDButton variant="outlined" color="primary" sx={{ minWidth: "100px", px: 0 }}>
+            Delete
+          </MDButton>
+        </MDBox>
         <MDTypography
           color="secondary"
           onClick={(event) => openMenu(event, item.id)}
@@ -168,8 +157,7 @@ function ImagesPage() {
           onClose={closeMenu}
           keepMounted
         >
-          <MenuItem>Action 1</MenuItem>
-          <MenuItem>Action 2</MenuItem>
+          <MenuItem>Edit</MenuItem>
         </Menu>
       </MDBox>
     ),
