@@ -5,14 +5,9 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-
-// Settings page components
-import FormField from "layouts/account/components/FormField";
-
-// Data
-import selectData from "layouts/account/settings/components/BasicInfo/data/selectData";
 import MDButton from "components/MDButton";
+
+import FormField from "layouts/account/components/FormField";
 
 function IncreaseQuotaForm() {
   return (
@@ -21,8 +16,8 @@ function IncreaseQuotaForm() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <Autocomplete
-              defaultValue={2}
-              options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+              defaultValue={"2"}
+              options={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]}
               renderInput={(params) => (
                 <FormField
                   {...params}
@@ -34,8 +29,8 @@ function IncreaseQuotaForm() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Autocomplete
-              defaultValue={4}
-              options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+              defaultValue={"4"}
+              options={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]}
               renderInput={(params) => (
                 <FormField
                   {...params}
@@ -47,8 +42,8 @@ function IncreaseQuotaForm() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Autocomplete
-              defaultValue={20}
-              options={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+              defaultValue={"20"}
+              options={["10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]}
               renderInput={(params) => (
                 <FormField
                   {...params}

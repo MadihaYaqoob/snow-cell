@@ -3,21 +3,23 @@ import { MenuItem } from "@mui/material";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Card from "@mui/material/Card";
+import Menu from "@mui/material/Menu";
+import Icon from "@mui/material/Icon";
+
+import useSupabaseRealtime from "flow/UseSupabaseRealTime";
+
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import DataTable from "examples/Tables/DataTable";
 import StopButton from "components/StopServerButton/StopButton.js";
 import RestartButton from "components/RestartServerButton/RestartButton";
 import DeleteButton from "components/DeleteServerButton/DeleteButton";
-import MDButton from "components/MDButton";
 import GenerateVMInstanceButton from "components/VirtualMachinesDialog/GenerateVMInstanceButton.js";
+
+import Footer from "examples/Footer";
+import DataTable from "examples/Tables/DataTable";
+import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import { columns } from "layouts/services/virtual-servers/data/virtualServersData";
-import Menu from "@mui/material/Menu";
-import Icon from "@mui/material/Icon";
-import useSupabaseRealtime from "flow/UseSupabaseRealTime";
 
 function VirtualServers() {
   const { data, loading, error, fetchData, setData } = useSupabaseRealtime("vm_instances", "*");

@@ -85,12 +85,12 @@ const routes = [
         route: "/dashboards/analytics",
         component: <Analytics />,
       },
-      {
-        name: "Grafana",
-        key: "grafana",
-        route: "/overview/grafana",
-        component: <Sales />,
-      },
+      // {
+      //   name: "Grafana",
+      //   key: "grafana",
+      //   route: "/overview/grafana",
+      //   component: <Sales />,
+      // },
     ],
   },
   {
