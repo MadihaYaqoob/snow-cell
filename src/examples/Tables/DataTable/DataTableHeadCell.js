@@ -22,6 +22,7 @@ function DataTableHeadCell({ width, children, sorted, align, ...rest }) {
       px={3}
       sx={({ palette: { light }, borders: { borderWidth } }) => ({
         borderBottom: `${borderWidth[1]} solid ${light.main}`,
+        minWidth: "120px",
       })}
     >
       <MDBox

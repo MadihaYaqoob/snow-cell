@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { MenuItem } from "@mui/material";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Card from "@mui/material/Card";
 import MDBox from "components/MDBox";
@@ -101,6 +103,9 @@ function VirtualServers() {
           onClose={closeMenu}
           keepMounted
         >
+          <Link to={`/services/increase-quota/${item.name}`}>
+            <MenuItem>Increate Quota Request</MenuItem>
+          </Link>
           <RestartButton vmId={item.id} onRestart={handleRestart} closeMenu={closeMenu} />
           <DeleteButton vmId={item.id} onDelete={handleDelete} closeMenu={closeMenu} />
         </Menu>

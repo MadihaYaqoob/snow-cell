@@ -35,7 +35,6 @@ function Sidenav() {
     { icon: "security", label: "2FA", href: "2fa" },
     { icon: "badge", label: "accounts", href: "accounts" },
     { icon: "campaign", label: "notifications", href: "notifications" },
-    { icon: "settings_applications", label: "sessions", href: "sessions" },
     { icon: "delete", label: "delete account", href: "delete-account" },
   ];
 

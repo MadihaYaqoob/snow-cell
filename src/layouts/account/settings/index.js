@@ -13,7 +13,6 @@ import ChangePassword from "layouts/account/settings/components/ChangePassword";
 import Authentication from "layouts/account/settings/components/Authentication";
 import Accounts from "layouts/account/settings/components/Accounts";
 import Notifications from "layouts/account/settings/components/Notifications";
-import Sessions from "layouts/account/settings/components/Sessions";
 import DeleteAccount from "layouts/account/settings/components/DeleteAccount";
 
 function Settings() {
@@ -44,9 +43,6 @@ function Settings() {
                 </Grid>
                 <Grid item xs={12}>
                   <Notifications />
-                </Grid>
-                <Grid item xs={12}>
-                  <Sessions />
                 </Grid>
                 <Grid item xs={12}>
                   <DeleteAccount />

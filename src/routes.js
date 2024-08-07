@@ -67,6 +67,7 @@ import SshKeys from "layouts/services/ssh-keys";
 import Settings from "layouts/account/settings";
 import Billing from "layouts/finances/billing";
 import Invoice from "layouts/finances/invoice";
+import QuotaIncrease from "layouts/services/quota-increase";
 
 // Authentication
 import ProtectedRoute from "./flow/ProtectedRoute";
@@ -267,6 +268,12 @@ const routes = [
         component: <Invoice />,
       },
     ],
+  },
+  {
+    name: "Increase Request Quota",
+    key: "request-quota",
+    route: "/services/increase-quota/:id?",
+    component: <QuotaIncrease />,
   },
   {
     type: "collapse",
