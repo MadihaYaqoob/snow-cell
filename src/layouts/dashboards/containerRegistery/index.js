@@ -14,6 +14,40 @@ import { useTheme } from "@mui/material/styles";
 
 import { useMaterialUIController } from "context";
 
+const Cell = (props) => {
+  const { value } = props;
+  const theme = useTheme(); // Access the theme using useTheme hook
+
+  return (
+    <MDBox display="flex" alignItems="center">
+      <MDTypography
+        component="span"
+        sx={{
+          width: 8,
+          height: 8,
+          borderRadius: "50%",
+          backgroundColor:
+            value === "Active"
+              ? theme.palette.mode === "dark"
+                ? "#00FF00"
+                : "green"
+              : theme.palette.mode === "dark"
+              ? "#FF0000"
+              : "red", // Adjust colors based on dark mode
+          display: "inline-block",
+          mr: 1,
+        }}
+      />
+      <MDTypography
+        variant="body2"
+        sx={{ color: theme.palette.mode === "dark" ? "white" : "black" }} // Ensure text is readable in both modes
+      >
+        {value}
+      </MDTypography>
+    </MDBox>
+  );
+};
+
 // Define columns for DataTable
 const containerRegistryColumns = [
   { Header: "ID", accessor: "id" },
@@ -21,38 +55,7 @@ const containerRegistryColumns = [
   {
     Header: "Status",
     accessor: "status",
-    Cell: ({ value }) => {
-      const theme = useTheme(); // Access the theme using useTheme hook
-
-      return (
-        <MDBox display="flex" alignItems="center">
-          <MDTypography
-            component="span"
-            sx={{
-              width: 8,
-              height: 8,
-              borderRadius: "50%",
-              backgroundColor:
-                value === "Active"
-                  ? theme.palette.mode === "dark"
-                    ? "#00FF00"
-                    : "green"
-                  : theme.palette.mode === "dark"
-                  ? "#FF0000"
-                  : "red", // Adjust colors based on dark mode
-              display: "inline-block",
-              mr: 1,
-            }}
-          />
-          <MDTypography
-            variant="body2"
-            sx={{ color: theme.palette.mode === "dark" ? "white" : "black" }} // Ensure text is readable in both modes
-          >
-            {value}
-          </MDTypography>
-        </MDBox>
-      );
-    },
+    Cell,
   },
   { Header: "Actions", accessor: "actions" },
 ];
@@ -220,5 +223,9 @@ function ImagesPage() {
     </DashboardLayout>
   );
 }
+
+Cell.propTypes = {
+  value: PropTypes.string,
+};
 
 export default ImagesPage;

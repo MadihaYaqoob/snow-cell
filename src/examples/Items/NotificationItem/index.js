@@ -50,6 +50,7 @@ const NotificationItem = forwardRef(({ icon, title, timestamp, ...rest }, ref) =
 NotificationItem.propTypes = {
   icon: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
+  timestamp: PropTypes.string,
 };
 
 export default NotificationItem;
