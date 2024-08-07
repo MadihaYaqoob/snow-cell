@@ -12,10 +12,6 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-
-
-import { useState, useEffect } from "react";
-
 // @mui/material components
 import Switch from "@mui/material/Switch";
 import Divider from "@mui/material/Divider";
@@ -40,7 +36,14 @@ function Configurator() {
 
   return (
     <ConfiguratorRoot variant="permanent" ownerState={{ openConfigurator }}>
-      <MDBox display="flex" justifyContent="space-between" alignItems="baseline" pt={4} pb={0.5} px={3}>
+      <MDBox
+        display="flex"
+        justifyContent="space-between"
+        alignItems="baseline"
+        pt={4}
+        pb={0.5}
+        px={3}
+      >
         <MDBox>
           <MDTypography variant="h5">Configurator</MDTypography>
         </MDBox>
@@ -62,7 +65,14 @@ function Configurator() {
 
       <Divider />
 
-      <MDBox display="flex" justifyContent="space-between" alignItems="center" lineHeight={1} mt={3} px={3}>
+      <MDBox
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        lineHeight={1}
+        mt={3}
+        px={3}
+      >
         <MDTypography variant="h6">Light / Dark</MDTypography>
         <Switch checked={darkMode} onChange={handleDarkMode} />
       </MDBox>

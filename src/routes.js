@@ -23,7 +23,7 @@
 // Material Dashboard 2 PRO React layouts
 import Analytics from "layouts/dashboards/analytics";
 import Sales from "layouts/dashboards/sales";
-import ContainerRegistery from "layouts/dashboards/containerRegistery"
+import ContainerRegistery from "layouts/dashboards/containerRegistery";
 import ProfileOverview from "layouts/pages/profile/profile-overview";
 import AllProjects from "layouts/pages/profile/all-projects";
 import NewUser from "layouts/pages/users/new-user";

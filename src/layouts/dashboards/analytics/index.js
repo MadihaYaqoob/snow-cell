@@ -1,6 +1,6 @@
 // src/pages/Overview.js
 
-import React from 'react';
+import React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Tooltip from "@mui/material/Tooltip";
@@ -62,7 +62,13 @@ function Analytic() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={4}>
               <Card sx={{ height: "93%", display: "flex", flexDirection: "column" }}>
-                <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={2} px={2}>
+                <MDBox
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  pt={2}
+                  px={2}
+                >
                   <MDTypography variant="h6">Resource Allocation</MDTypography>
                   <Tooltip title="See resource allocation" placement="bottom" arrow>
                     <MDButton variant="outlined" color="secondary" size="small" circular iconOnly>
@@ -74,7 +80,7 @@ function Analytic() {
                   <Grid container alignItems="center">
                     <Grid item xs={8}>
                       <MDBox p={2}>
-                        <PieChart 
+                        <PieChart
                           chart={resourceAllocationData.allocation}
                           height="15rem" // Adjust height as needed
                         />

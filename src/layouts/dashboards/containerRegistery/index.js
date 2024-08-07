@@ -10,54 +10,58 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Icon from "@mui/material/Icon";
 import MDButton from "components/MDButton";
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
 import { useMaterialUIController } from "context";
 
-
 // Define columns for DataTable
 const containerRegistryColumns = [
-    { Header: "ID", accessor: "id" },
-    { Header: "Name", accessor: "name" },
-    {
-      Header: "Status",
-      accessor: "status",
-      Cell: ({ value }) => {
-        const theme = useTheme();  // Access the theme using useTheme hook
-  
-        return (
-          <MDBox display="flex" alignItems="center">
-            <MDTypography
-              component="span"
-              sx={{
-                width: 8,
-                height: 8,
-                borderRadius: "50%",
-                backgroundColor: value === "Active" 
-                  ? (theme.palette.mode === 'dark' ? "#00FF00" : "green") 
-                  : (theme.palette.mode === 'dark' ? "#FF0000" : "red"),  // Adjust colors based on dark mode
-                display: "inline-block",
-                mr: 1,
-              }}
-            />
-            <MDTypography
-              variant="body2"
-              sx={{ color: theme.palette.mode === 'dark' ? "white" : "black" }}  // Ensure text is readable in both modes
-            >
-              {value}
-            </MDTypography>
-          </MDBox>
-        );
-      },
+  { Header: "ID", accessor: "id" },
+  { Header: "Name", accessor: "name" },
+  {
+    Header: "Status",
+    accessor: "status",
+    Cell: ({ value }) => {
+      const theme = useTheme(); // Access the theme using useTheme hook
+
+      return (
+        <MDBox display="flex" alignItems="center">
+          <MDTypography
+            component="span"
+            sx={{
+              width: 8,
+              height: 8,
+              borderRadius: "50%",
+              backgroundColor:
+                value === "Active"
+                  ? theme.palette.mode === "dark"
+                    ? "#00FF00"
+                    : "green"
+                  : theme.palette.mode === "dark"
+                  ? "#FF0000"
+                  : "red", // Adjust colors based on dark mode
+              display: "inline-block",
+              mr: 1,
+            }}
+          />
+          <MDTypography
+            variant="body2"
+            sx={{ color: theme.palette.mode === "dark" ? "white" : "black" }} // Ensure text is readable in both modes
+          >
+            {value}
+          </MDTypography>
+        </MDBox>
+      );
     },
-    { Header: "Actions", accessor: "actions" }
-  ];
+  },
+  { Header: "Actions", accessor: "actions" },
+];
 
 const currentImagesColumns = [
   { Header: "ID", accessor: "id" },
   { Header: "Image", accessor: "image" },
   { Header: "Size", accessor: "size" },
-  { Header: "Actions", accessor: "actions" }
+  { Header: "Actions", accessor: "actions" },
 ];
 
 function ImagesPage() {
@@ -91,10 +95,14 @@ function ImagesPage() {
     ...item,
     actions: (
       <MDBox display="flex" alignItems="center">
-        <MDButton variant="text" color="error" sx={{ minWidth: 'auto', px: 0 }}>
+        <MDButton variant="text" color="error" sx={{ minWidth: "auto", px: 0 }}>
           <Icon>delete</Icon>
         </MDButton>
-        <MDButton variant="text" color={darkMode ? "#B0B0B0" : "dark"} sx={{ minWidth: 'auto', px: 0, ml: 1 }}>
+        <MDButton
+          variant="text"
+          color={darkMode ? "#B0B0B0" : "dark"}
+          sx={{ minWidth: "auto", px: 0, ml: 1 }}
+        >
           <Icon>edit</Icon>
         </MDButton>
         <MDTypography
@@ -127,10 +135,14 @@ function ImagesPage() {
     ...item,
     actions: (
       <MDBox display="flex" alignItems="center">
-        <MDButton variant="text" color="error" sx={{ minWidth: 'auto', px: 0.5 }}>
+        <MDButton variant="text" color="error" sx={{ minWidth: "auto", px: 0.5 }}>
           <Icon>delete</Icon>
         </MDButton>
-        <MDButton variant="text" color={darkMode ? "#B0B0B0" : "dark"} sx={{ minWidth: 'auto', px: 0.5, ml: 1 }}>
+        <MDButton
+          variant="text"
+          color={darkMode ? "#B0B0B0" : "dark"}
+          sx={{ minWidth: "auto", px: 0.5, ml: 1 }}
+        >
           <Icon>edit</Icon>
         </MDButton>
         <MDTypography
@@ -210,4 +222,3 @@ function ImagesPage() {
 }
 
 export default ImagesPage;
-

@@ -1,70 +1,72 @@
-// @mui material components
+import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
-// Material Dashboard 2 PRO React components
-import MasterCard from "examples/Cards/MasterCard";
-import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
+// Material Dashboard 2 PRO React examples
+import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import Footer from "examples/Footer";
 
-// Billing page components
-import BaseLayout from "layouts/account/components/BaseLayout";
-import PaymentMethod from "layouts/finances/billing/components/PaymentMethod";
-import Invoices from "layouts/finances/billing/components/Invoices";
-import BillingInformation from "layouts/finances/billing/components/BillingInformation";
-import Transactions from "layouts/finances/billing/components/Transactions";
+// Data fetching functions
+import { fetchCostOfInstances, fetchAccruedCosts } from "layouts/finances/billing/api";
 
-function Billing() {
+const Billing = () => {
+  const [costOfInstancesData, setCostOfInstancesData] = useState(null);
+  const [accruedCostsData, setAccruedCostsData] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      const costData = await fetchCostOfInstances();
+      const accruedData = await fetchAccruedCosts();
+      setCostOfInstancesData(costData);
+      setAccruedCostsData(accruedData);
+    };
+
+    getData();
+  }, []);
+
   return (
-    <BaseLayout stickyNavbar>
+    <DashboardLayout>
+      <DashboardNavbar />
       <MDBox mt={4}>
         <MDBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={8}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} xl={6}>
-                  <MasterCard number={4562112245947852} holder="jack peterson" expires="11/22" />
-                </Grid>
-                <Grid item xs={12} md={6} xl={3}>
-                  <DefaultInfoCard
-                    icon="account_balance"
-                    title="salary"
-                    description="Belong Interactive"
-                    value="+$2000"
-                  />
-                </Grid>
-                <Grid item xs={12} md={6} xl={3}>
-                  <DefaultInfoCard
-                    icon="paypal"
-                    title="paypal"
-                    description="Freelance Payment"
-                    value="$455.00"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <PaymentMethod />
-                </Grid>
-              </Grid>
+            <Grid item xs={12} md={6}>
+              <Card>
+                <MDBox p={2}>
+                  <MDTypography variant="h6" fontWeight="medium">
+                    Cost of Instances
+                  </MDTypography>
+                  {costOfInstancesData && (
+                    <Bar data={costOfInstancesData} options={{ responsive: true }} />
+                  )}
+                </MDBox>
+              </Card>
             </Grid>
-            <Grid item xs={12} lg={4}>
-              <Invoices />
-            </Grid>
-          </Grid>
-        </MDBox>
-        <MDBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={7}>
-              <BillingInformation />
-            </Grid>
-            <Grid item xs={12} md={5}>
-              <Transactions />
+            <Grid item xs={12} md={6}>
+              <Card>
+                <MDBox p={2}>
+                  <MDTypography variant="h6" fontWeight="medium">
+                    Accrued Costs
+                  </MDTypography>
+                  {accruedCostsData && (
+                    <Line data={accruedCostsData} options={{ responsive: true }} />
+                  )}
+                </MDBox>
+              </Card>
             </Grid>
           </Grid>
         </MDBox>
       </MDBox>
-    </BaseLayout>
+      <Footer />
+    </DashboardLayout>
   );
-}
+};
 
 export default Billing;
