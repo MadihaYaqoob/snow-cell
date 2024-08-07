@@ -1,4 +1,4 @@
-// @mui material components
+/// @mui material components
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 
@@ -50,8 +50,8 @@ function Overview() {
             <Grid item xs={12} md={6} xl={4} sx={{ display: "flex" }}>
               <Divider orientation="vertical" sx={{ ml: -2, mr: 1 }} />
               <ProfileInfoCard
-                title="profile information"
-                description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
+                title="Profile Information"
+                description="Hi, I’m Alec Thompson. Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term."
                 info={{
                   fullName: "Alec M. Thompson",
                   mobile: "(44) 123 1234 123",
@@ -81,10 +81,78 @@ function Overview() {
               <Divider orientation="vertical" sx={{ mx: 0 }} />
             </Grid>
             <Grid item xs={12} xl={4}>
-              <ProfilesList title="conversations" profiles={profilesListData} shadow={false} />
+              <ProfilesList title="Conversations" profiles={profilesListData} shadow={false} />
             </Grid>
           </Grid>
         </MDBox>
+
+        {/* My Profile Section */}
+        <MDBox pt={2} px={2} lineHeight={1.25}>
+          <MDTypography variant="h6" fontWeight="medium">
+            My Profile
+          </MDTypography>
+          <MDBox mb={1}>
+            <MDTypography variant="button" color="text">
+              Overview of your activity and settings
+            </MDTypography>
+          </MDBox>
+        </MDBox>
+
+        {/* User's Activity History */}
+        <MDBox p={2}>
+          <MDTypography variant="h6" fontWeight="medium">
+            Activity History
+          </MDTypography>
+          <MDBox mb={2}>
+            <MDTypography variant="body2" color="text">
+              Recent actions or logins will be displayed here.
+            </MDTypography>
+            {/* Implement a component to list recent activities */}
+          </MDBox>
+        </MDBox>
+
+        {/* Resource Usage Statistics */}
+        <MDBox p={2}>
+          <MDTypography variant="h6" fontWeight="medium">
+            Resource Usage
+          </MDTypography>
+          <MDBox mb={2}>
+            <MDTypography variant="body2" color="text">
+              Total resources allocated: X units
+            </MDTypography>
+            <MDTypography variant="body2" color="text">
+              Average usage: Y units
+            </MDTypography>
+            {/* Implement a component to display resource usage statistics */}
+          </MDBox>
+        </MDBox>
+
+        {/* Billing Information Summary */}
+        <MDBox p={2}>
+          <MDTypography variant="h6" fontWeight="medium">
+            Billing Information
+          </MDTypography>
+          <MDBox mb={2}>
+            <MDTypography variant="body2" color="text">
+              Summary of your billing information will be displayed here.
+            </MDTypography>
+            {/* Implement a component to display billing information */}
+          </MDBox>
+        </MDBox>
+
+        {/* User Settings and Preferences */}
+        <MDBox p={2}>
+          <MDTypography variant="h6" fontWeight="medium">
+            Settings & Preferences
+          </MDTypography>
+          <MDBox mb={2}>
+            <MDTypography variant="body2" color="text">
+              Preferred UI settings and notification preferences will be displayed here.
+            </MDTypography>
+            {/* Implement a component to manage user settings */}
+          </MDBox>
+        </MDBox>
+
         <MDBox pt={2} px={2} lineHeight={1.25}>
           <MDTypography variant="h6" fontWeight="medium">
             Projects
@@ -100,14 +168,14 @@ function Overview() {
             <Grid item xs={12} md={6} xl={3}>
               <DefaultProjectCard
                 image={homeDecor1}
-                label="project #2"
-                title="modern"
+                label="Project #2"
+                title="Modern"
                 description="As Uber works through a huge amount of internal management turmoil."
                 action={{
                   type: "internal",
                   route: "/pages/profile/profile-overview",
                   color: "info",
-                  label: "view project",
+                  label: "View Project",
                 }}
                 authors={[
                   { image: team1, name: "Elena Morison" },
@@ -120,14 +188,14 @@ function Overview() {
             <Grid item xs={12} md={6} xl={3}>
               <DefaultProjectCard
                 image={homeDecor2}
-                label="project #1"
-                title="scandinavian"
+                label="Project #1"
+                title="Scandinavian"
                 description="Music is something that everyone has their own specific opinion about."
                 action={{
                   type: "internal",
                   route: "/pages/profile/profile-overview",
                   color: "info",
-                  label: "view project",
+                  label: "View Project",
                 }}
                 authors={[
                   { image: team3, name: "Nick Daniel" },
@@ -140,14 +208,14 @@ function Overview() {
             <Grid item xs={12} md={6} xl={3}>
               <DefaultProjectCard
                 image={homeDecor3}
-                label="project #3"
-                title="minimalist"
+                label="Project #3"
+                title="Minimalist"
                 description="Different people have different taste, and various types of music."
                 action={{
                   type: "internal",
                   route: "/pages/profile/profile-overview",
                   color: "info",
-                  label: "view project",
+                  label: "View Project",
                 }}
                 authors={[
                   { image: team4, name: "Peterson" },
@@ -160,14 +228,14 @@ function Overview() {
             <Grid item xs={12} md={6} xl={3}>
               <DefaultProjectCard
                 image={homeDecor4}
-                label="project #4"
-                title="gothic"
+                label="Project #4"
+                title="Gothic"
                 description="Why would anyone pick blue over pink? Pink is obviously a better color."
                 action={{
                   type: "internal",
                   route: "/pages/profile/profile-overview",
                   color: "info",
-                  label: "view project",
+                  label: "View Project",
                 }}
                 authors={[
                   { image: team4, name: "Peterson" },
