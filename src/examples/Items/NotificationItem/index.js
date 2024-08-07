@@ -28,24 +28,30 @@ import MDTypography from "components/MDTypography";
 
 // custom styles for the NotificationItem
 import menuItem from "examples/Items/NotificationItem/styles";
+import { useMaterialUIController } from "context";
 
-const NotificationItem = forwardRef(({ icon, title, timestamp, ...rest }, ref) => (
-  <MenuItem {...rest} ref={ref} sx={(theme) => menuItem(theme)}>
-    <MDBox component={Link} py={0.5} display="flex" alignItems="center" lineHeight={1}>
-      <MDTypography variant="body1" color="secondary" lineHeight={0.75}>
-        {icon}
-      </MDTypography>
-      <MDBox display="flex" flexDirection="column" ml={1}>
-        <MDTypography variant="button" fontWeight="regular">
-          {title}
+const NotificationItem = forwardRef(({ icon, title, timestamp, ...rest }, ref) => {
+  const [controller] = useMaterialUIController();
+  const { darkMode } = controller;
+
+  return (
+    <MenuItem {...rest} ref={ref} sx={(theme) => menuItem(theme)}>
+      <MDBox component={Link} py={0.5} display="flex" alignItems="center" lineHeight={1}>
+        <MDTypography variant="body1" color="secondary" lineHeight={0.75}>
+          {icon}
         </MDTypography>
-        <MDTypography variant="caption" color="textSecondary" mt={0.5}>
-          {timestamp}
-        </MDTypography>
+        <MDBox display="flex" flexDirection="column" ml={1}>
+          <MDTypography variant="button" fontWeight="regular">
+            {title}
+          </MDTypography>
+          <MDTypography variant="caption" color={darkMode ? "dark" : "secondary"} mt={0.5}>
+            {timestamp}
+          </MDTypography>
+        </MDBox>
       </MDBox>
-    </MDBox>
-  </MenuItem>
-));
+    </MenuItem>
+  );
+});
 // Typechecking props for the NotificationItem
 NotificationItem.propTypes = {
   icon: PropTypes.node.isRequired,
